@@ -8,35 +8,48 @@ Created on Sat Mar  2 16:11:01 2024
 
 import csv
 import random
+import os
+
+def clear_console():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def extract_data():
     data = {}
     with open("instagram_top_1000.csv",'r') as file:
         reader = csv.DictReader(file, fieldnames=['Country', 'Rank', 'Account', 'Title', 'Link', 'Category', 'Followers', 'Audience Country', 'Authentic engagement', 'Engagement avg', 'Scraped'])
         for line in reader:
-            data[line['Title']] = line['Rank']
+            data[f"{line['Title']} of Category {line['Category']}"] = line['Rank']
     return data
 
 def game():
-    print('''////////////////////////////////////////////////////////////////
+    logo='''////////////////////////////////////////////////////////////////
 // _   _ _       _                ___                         //
 //| | | (_) __ _| |__   ___ _ __ / / | _____      _____ _ __  //
 //| |_| | |/ _` | '_ \ / _ \ '__/ /| |/ _ \ \ /\ / / _ \ '__| //
 //|  _  | | (_| | | | |  __/ | / / | | (_) \ V  V /  __/ |    //
 //|_| |_|_|\__, |_| |_|\___|_|/_/  |_|\___/ \_/\_/ \___|_|    //
 //         |___/                                              //
-////////////////////////////////////////////////////////////////''')
+////////////////////////////////////////////////////////////////'''
+    versus = '''oooooo     oooo         
+ `888.     .8'          
+  `888.   .8'    .oooo.o
+   `888. .8'    d88(  "8
+    `888.8'     `"Y88b. 
+     `888'      o.  )88b
+      `8'       8""888P'''
     data = extract_data()
     keys = list(data.keys())
     play = True
     p_points = 0
     while play:
+        clear_console()
+        print(logo)
         char1 = random.choice(keys)
         char2 = random.choice(keys)
         if char1 == char2:
             continue
         print("Choose Between The Following!")
-        print(f" 1 {char1} | 2 {char2} ")
+        print(f" 1 {char1} \n{versus}\n 2 {char2} \n")
         choice = int(input())
         if choice == 1 and data[char1] < data[char2]:
             print("You are right!")
@@ -46,6 +59,7 @@ def game():
             print("You are wrong!")
             print("Player_points - 10")
             p_points -= 10
+        print(f"You have {p_points} points currently.")
         again = input("Do you want to guess again? Y/n\n").lower()
         if again == 'y':
             continue
