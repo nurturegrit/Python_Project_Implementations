@@ -15,10 +15,8 @@ def main():
         elif order == 'report':
             coffee_maker.report()
             money_machine.report()
-        elif menu.find_drink(order):
-            for i in range(3):
-                if order == menu.menu[i].name:
-                    drink = menu.menu[i]
+        else:
+            drink = menu.find_drink(order)
             if coffee_maker.is_resource_sufficient(drink):
                 if money_machine.make_payment(drink.cost):
                     coffee_maker.make_coffee(drink)
