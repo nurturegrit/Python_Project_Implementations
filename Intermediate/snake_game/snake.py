@@ -62,3 +62,11 @@ class Snake:
         if self.head.heading() == 90:
             return
         self.head.setheading(270)
+
+    def reset(self):
+        for seg in self.body:
+            seg.goto(1000,1000)
+        self.body.clear()
+        self.create_snake()
+        self.head = self.body[0]
+
