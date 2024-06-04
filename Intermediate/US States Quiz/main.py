@@ -33,10 +33,7 @@ def main():
             writer.goto(x, y)
             writer.write(guess)
             guessed.append(guess)
-    missed = []
-    for state in states:
-        if state not in guessed:
-            missed.append(state)
+    missed = [state for state in states if state not in guessed]
     pd.Series(missed).to_csv("Missed_States.csv")
     return score
 
