@@ -7,7 +7,7 @@ password = "gsai chlq kmav iali"
 server = smtplib.SMTP("smtp.gmail.com", port=587)
 server.starttls()
 server.login(email, password)
-if today == 0:
+if today == 7:
     try:
         with open("quotes.txt", 'r') as quotes_file:
             quotes = list(quotes_file.readlines())
@@ -15,5 +15,5 @@ if today == 0:
         print("File Not Found.")
     finally:
         quote = random.choice(quotes)
-        server.sendmail(to_addrs="sumitatcultivatewill@gmail.com", from_addr=email, msg="Subject:Quote Of The Day\n\n"
+        server.sendmail(to_addrs="sumitatcultivatewill@yahoo.com", from_addr=email, msg="Subject:Quote Of The Day\n\n"
                                                                                     f"{quote}")
